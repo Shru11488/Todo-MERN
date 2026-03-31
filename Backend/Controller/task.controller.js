@@ -87,3 +87,23 @@ export const updateTaskStatus = async(req,res)=>{
   res.status(500).json({error:error.message})
  }
 }
+
+export const updateTask = async(req, res) => {
+    try {
+        const { title, description, assignedTo } = req.body
+        const task = await Task.findByIdAndUpdate(
+            req.params.id,
+            { title, description, assignedTo },
+            { new: true }
+        ).populate("assignedTo", "fullname email")
+
+        if (!task) {
+            return res.status(404).json({ message: "Task not found" })
+        }
+
+        res.status(200).json(task)
+    } catch (error) {
+        console.log("Error in updateTask controller", error.message)
+        res.status(500).json({ error: error.message })
+    }
+}
