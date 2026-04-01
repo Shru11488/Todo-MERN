@@ -2,7 +2,8 @@
   "name": "todo-mern",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "build": "npm install --prefix Frontend && npm run build --prefix Frontend"
+    "build": "npm install --prefix Backend && npm install --prefix Frontend && npm run build --prefix Frontend"
   }
 }
